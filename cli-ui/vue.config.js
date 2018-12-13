@@ -22,7 +22,7 @@ module.exports = {
                 }
             },
             externals:{
-                'axios':'axios'
+                'axios':'axios',
             },
         });
     },

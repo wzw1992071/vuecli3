@@ -1,6 +1,14 @@
 <template>
     <div>
-        <el-button type="primary">主要按钮2</el-button>
+        <div id="mapBox" class="mapBox">
+
+        </div>
+        <div @click="addweilan">
+            画多边形
+        </div>
+        <div @click="closeTool">
+            结束
+        </div>
     </div>
 </template>
 
@@ -9,37 +17,53 @@ export default {
     name:"Index",
     data(){
         return{
-            
+            map:{},
+            mouseTool:{}
         }
     },
     methods:{
-        getData(){
-            this.$http.getShopTypeLists().then(res=>{
-                console.log(res)
+        initMap(){
+            this.$nextTick(()=>{
+                this.map = new AMap.Map('mapBox');
+                this.map.setDefaultCursor("pointer");
+                this.map.addControl(new AMap.Scale({ visible: true}))
             })
+        },
+        
+        addweilan(){
+            // this.map.plugin(["AMap.PolyEditor"],()=>{
+            //     polygonEditor = new AMap.PolyEditor(this.map,polygon); 
+            //     polygonEditor.open(); 
+            // });  
+            this.mouseTool = new AMap.MouseTool(this.map);   
+            var overlays = [];
+            this.mouseTool.on(this.mouseTool.polygon({
+              strokeColor:'#80d8ff'
+            }),(e)=>{
+                overlays.push(e.obj);
+                 console.log(e)
+            }) 
+            
+        },
+        closeTool(){
+            this.mouseTool.close()
         }
     },
     created(){
-        this.getData()
+        this.initMap()
+
     },
     beforeCreate () {
-        // console.log(1)
-        // 如果为本地，模拟登陆获取token
-        if(window.location.hostname=="localhost"){
-        this.$axios.post("/user/login/test",{
-        
-        })
-        .then(function(){
-            console.log("登陆成功")})
-        .catch(function(){
-            console.log("登陆失败，请重新登陆")
-        })
+      
     
     }  
-  },
+  
 }
 </script>
 
 <style lang="less" scoped>
-
+    #mapBox{
+        width: 800px;
+        height: 600px;
+    }
 </style>
