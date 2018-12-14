@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 export default {
     name:"Index",
     data(){
@@ -21,11 +22,18 @@ export default {
             mouseTool:{}
         }
     },
+    computed:{
+        ...mapGetters["defaultXY"]
+    },
     methods:{
         initMap(){
             this.$nextTick(()=>{
-                this.map = new AMap.Map('mapBox');
+                this.map = new AMap.Map('mapBox',{
+                    zoom:12,//级别
+                    center: this.defaultXY,//中心点坐标
+                });
                 this.map.setDefaultCursor("pointer");
+                // 添加比例尺
                 this.map.addControl(new AMap.Scale({ visible: true}))
             })
         },

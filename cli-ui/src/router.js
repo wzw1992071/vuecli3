@@ -8,8 +8,22 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: _import('pages/index/index')
+      name: 'Box',
+      component: _import('index'),
+      children:[
+        {
+          path: 'index', 
+          component: _import('pages/index/index')
+        },
+        {
+          path: 'addOrder', 
+          component: _import('pages/index/addOrder')
+        },
+        {
+          path: 'test', 
+          component: _import('pages/index/test')
+        },
+      ]
     },
     
   ]

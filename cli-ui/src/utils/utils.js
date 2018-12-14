@@ -8,7 +8,7 @@ export default {
     createFilter(queryString, type) {
         return restaurant => {
             return (
-            restaurant[type].toLowerCase().indexOf(queryString.toLowerCase()) ===0);
+            restaurant[type].toLowerCase().indexOf(queryString.toLowerCase()) >=0);
         };
     }
 }

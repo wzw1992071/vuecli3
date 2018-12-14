@@ -15,5 +15,17 @@ export default {
     //     })
         
     // },
+    // 点击导航添加页签
+    addNewTab:({commit},obj)=>{
+        commit('ADDNEWTAB',obj)
+    },
+    // 选择页签
+    chioceTab:({commit},objID)=>{
+        commit('CHIOCETAB',objID)
+    },
+    // 删除页签
+    delectTab:({commit},obj)=>{
+        commit('DELECTTAB',obj)
+    },
     
 }
