@@ -11,9 +11,9 @@
         </el-aside>
         <el-main class="main-content">
             <div class="headTab">
-                <div class="tabItem" v-for="(item,index) in headTabList">
-                    <div>{{item.name}}</div>
-                    <span class="close el-icon-close"></span>
+                <div class="tabItem" v-for="(item,index) in headTabList" :key="index" :class="{current:item.index==currentTab}">
+                    <div @click="chioceTab(item.index)">{{item.name}}</div>
+                    <span class="close el-icon-close" @click="delectTab(item)"></span>
                 </div>
             </div>
             <div>
@@ -55,8 +55,17 @@ export default {
         console.log(checkNav)
         if(checkNav.length>0){
             this.$router.push(checkNav[0].path)
+        }else{
+          this.$router.push("/")
         }
       }
+  },
+  methods:{
+    ...mapActions(["chioceTab","delectTab"]),
+    // 关闭页签
+    closeTab(){
+
+    }
   },
   beforeCreate () {
     // 如果为本地，模拟登陆获取token
@@ -73,6 +82,7 @@ export default {
     // }
   },
   created(){
+    this.$router.push("/")
   }
 
 
@@ -120,6 +130,9 @@ export default {
                 padding:0px 10px;
                 &:hover{
                     background-color: #eee;
+                }
+                &.current{
+                  background: #fff;
                 }
                 .close{
                     position: absolute;
