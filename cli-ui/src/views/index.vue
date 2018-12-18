@@ -52,7 +52,7 @@ export default {
         let checkNav = this.headTabList.filter(item=>{
            return item.index == curVal
         })
-        console.log(checkNav)
+        // console.log(checkNav)
         if(checkNav.length>0){
             this.$router.push(checkNav[0].path)
         }else{
