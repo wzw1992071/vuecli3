@@ -30,4 +30,11 @@ export default {
             states.currentTab = states.headTabList.length>0?states.headTabList[0].index:"";
         }
     },
+    SAVEREALDRIVER(states,obj){
+        states.realDispatchDiver = obj
+    },
+    SAVEEXCEPTDRIVER(states,obj){
+        states.exceptDispatchDiver = obj
+    },
+
 }

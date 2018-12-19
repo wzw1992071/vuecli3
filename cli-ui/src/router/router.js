@@ -23,6 +23,17 @@ export default new Router({
           path: 'test', 
           component: _import('pages/index/test')
         },
+        // 智能分配
+        // 实时分配
+        {
+          path: 'realDispatch', 
+          component: _import('pages/autoDispatch/realDispatch')
+        },
+        // 预分配
+        {
+          path: 'exceptDispatch', 
+          component: _import('pages/autoDispatch/exceptDispatch')
+        },
       ]
     },
     

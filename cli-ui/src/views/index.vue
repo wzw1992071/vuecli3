@@ -16,7 +16,7 @@
                     <span class="close el-icon-close" @click="delectTab(item)"></span>
                 </div>
             </div>
-            <div>
+            <div class="mainPage">
                 <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
@@ -149,6 +149,12 @@ export default {
                     }
                 }
             }
+        }
+        .mainPage{
+          height: calc(100% - 37px);
+          &>div{
+            height: 100%;
+          }
         }
     }
   }

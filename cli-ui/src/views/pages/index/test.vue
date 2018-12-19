@@ -12,6 +12,9 @@ export default {
         return {
             shop_name:""
         }
+    },
+    created(){
+        console.log(this.$_)
     }
 }
 </script>

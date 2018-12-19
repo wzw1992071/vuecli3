@@ -27,5 +27,13 @@ export default {
     delectTab:({commit},obj)=>{
         commit('DELECTTAB',obj)
     },
-    
+    // 地图保存分配状态（方便取消拿值）
+    // 实时分配
+    saveRealDriver({commit},obj){
+        commit('SAVEREALDRIVER',obj)
+    },
+    // 预分配
+    saveExceptDrive({commit},obj){
+        commit('SAVEEXCEPTDRIVER',obj)
+    }
 }

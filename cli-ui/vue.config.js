@@ -23,6 +23,7 @@ module.exports = {
             },
             externals:{
                 'axios':'axios',
+                '_':'_',
             },
         });
     },

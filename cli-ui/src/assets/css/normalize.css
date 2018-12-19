@@ -80,3 +80,6 @@ a {
 .flex {
   display: flex;
 }
+.flex.space-between {
+  justify-content: space-between;
+}

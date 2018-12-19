@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import axios from "@/utils/myAxios"
 import * as Allhttp from "@/http/http"
-import router from './router'
+import router from './router/router'
 import store from "@/vuex/store"
 
 
@@ -21,6 +21,7 @@ Vue.use(ElementUI);
 // 引入封装过的axios
 Vue.prototype.$http = Allhttp
 Vue.prototype.$axios = axios
+Vue.prototype.$_ = _
 
 Vue.config.productionTip = false
 

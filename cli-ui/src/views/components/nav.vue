@@ -38,6 +38,14 @@ export default {
                 {index:"1-2",  name:"冻参谋导入",path:"/addOrder"},
                 {index:"1-3",  name:"测试",path:"/test"},
               ]
+          },
+          { 
+              index:"4",  
+              name:"智能分配",
+              childs:[
+                {index:"4-1",  name:"实时分配",path:"/realDispatch"},
+                {index:"4-2",  name:"预分配",path:"/exceptDispatch"},
+              ]
           }
                
         ]
