@@ -123,8 +123,20 @@ export default {
                     this.polyEditor=new AMap.PolyEditor(this.map, polygonObj.Polygon)
                     this.polyEditor.open();
                     this.polyEditor.on('end', (event)=>{
-                        console.log(event)
-                        console.log(polygonObj)
+                        // console.log(event)
+                        // console.log(polygonObj)
+                        this.diverList.forEach((item,index)=>{
+                            if(item.id == polygonObj.id){
+                                let listArr = []
+                                event.target.C.path.forEach((item,index) => {
+                                    listArr.push([
+                                        item.lng,item.lat
+                                    ])
+                                });
+                                item.polygonArr=listArr;
+                            }
+                        })
+                        localStorage.setItem('diverList', JSON.stringify(this.diverList));
                         // polygonObj
                     })
                 });
