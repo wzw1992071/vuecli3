@@ -22,8 +22,8 @@
                         </div>
                         <div>
                             <el-button type="primary" size="small" v-if="item.polygonArr.length" plain :disabled="showEditor" @click="editPoly(index)">调整框选范围</el-button>     
-                            <el-button type="primary" size="small" v-else  plain :disabled="showEditor">手动框选返回</el-button>
-                            <el-button type="primary" size="small"v-if="item.isEdit"  plain @click="closeEditor(index)">结束调整</el-button>
+                            <el-button type="primary" size="small" v-else  plain :disabled="showEditor" @click="addPoly(index)">手动框选范围</el-button>
+                            <el-button type="primary" size="small" v-if="item.isEdit"  plain @click="closeEditor(index)">结束调整</el-button>
                         </div>
                     </li>
                 </ul>
@@ -95,14 +95,14 @@ export default {
     },
     watch: {
         activeDiver(val,oldVal){
-            console.log(val&&(!this.$_.isEmpty(this.PolygonList[val])))
-            // if(val&&(!this.$_.isEmpty(this.PolygonList[val]))){
-            //     this.PolygonList[val].setOptions({strokeColor:"#f00"})
-            // }
-            
-            // if(oldVal&&(!this.$_.isEmpty(this.PolygonList[oldVal]))){
-            //     this.PolygonList[oldVal].setOptions({strokeColor:"#80d8ff"})
-            // }
+            if(!(oldVal==="")){
+                if(!this.$_.isEmpty(this.PolygonList[oldVal])){
+                    this.PolygonList[oldVal].setOptions({strokeColor:"#80d8ff"})
+                }
+            }
+            if(!this.$_.isEmpty(this.PolygonList[val])){
+                this.PolygonList[val].setOptions({strokeColor:"#f00"})
+            }
         }
     },
     computed:{
@@ -142,7 +142,19 @@ export default {
                         this.activeDiver = this.$_.findIndex(this.PolygonList,polygonObj)
                     })
                 }
-               
+                
+            });
+        },
+        // 新增区域
+        addPoly(index){
+            this.mouseTool = new AMap.MouseTool(this.map);   
+            this.mouseTool.on(this.mouseTool.polygon({
+              strokeColor:'#80d8ff'
+            })) 
+            AMap.event.addListener(this.mouseTool, 'draw', (polygonObj)=> {
+                console.log(polygonObj)
+                this.PolygonList[index]=polygonObj.obj
+                this.mouseTool.close()
             });
         },
         // 调整范围
