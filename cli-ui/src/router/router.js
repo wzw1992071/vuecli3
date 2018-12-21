@@ -23,7 +23,7 @@ export default new Router({
           path: 'test', 
           component: _import('pages/index/test')
         },
-        // 智能分配
+    // 智能分配
         // 实时分配
         {
           path: 'realDispatch', 
@@ -33,6 +33,27 @@ export default new Router({
         {
           path: 'exceptDispatch', 
           component: _import('pages/autoDispatch/exceptDispatch')
+        },
+    // 车队管理
+        {
+          path: 'manageCar', 
+          component: _import('pages/manageCar/manageCar')
+        }, 
+    // 客户管理  
+        //  收货人
+        {
+          path: 'consignee', 
+          component: _import('pages/userManage/consignee')
+        }, 
+        // 发货人
+        {
+          path: 'consignor', 
+          component: _import('pages/userManage/consignor')
+        }, 
+    // 区域配置
+        {
+          path: 'areaSetting', 
+          component: _import('pages/areaSetting/areaSetting')
         },
       ]
     },

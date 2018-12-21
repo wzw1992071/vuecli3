@@ -40,13 +40,37 @@ export default {
               ]
           },
           { 
-              index:"4",  
+              index:"2",  
               name:"智能分配",
               childs:[
-                {index:"4-1",  name:"实时分配",path:"/realDispatch"},
-                {index:"4-2",  name:"预分配",path:"/exceptDispatch"},
+                {index:"2-1",  name:"实时分配",path:"/realDispatch"},
+                {index:"2-2",  name:"预分配",path:"/exceptDispatch"},
               ]
-          }
+          },
+          { 
+              index:"3",  
+              name:"车队管理",
+              childs:[
+                {index:"3-1",  name:"车队管理",path:"/manageCar"},
+               
+              ]
+          },
+          { 
+              index:"4",  
+              name:"客户管理",
+              childs:[
+                {index:"4-1",  name:"收货人",path:"/consignee"},
+                {index:"4-2",  name:"发货人",path:"/consignor"}
+              ]
+          },
+          { 
+              index:"5",  
+              name:"区域配置",
+              childs:[
+                {index:"5-1",  name:"区域配置",path:"/areaSetting"},
+               
+              ]
+          },
                
         ]
     }
