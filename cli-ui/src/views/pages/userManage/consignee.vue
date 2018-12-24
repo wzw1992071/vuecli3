@@ -4,7 +4,7 @@
         <div class="header">收货人管理</div>
         <div class="searchArea flex">
             <el-input class="searchInput" v-model="keyWord" placeholder="收货人名、手机号、微信名"></el-input>
-            <el-button type="primary">搜索</el-button>
+            <el-button type="primary" @click="changeUser">搜索</el-button>
         </div>
         <div class="fileter flex">
             <div>筛选条件:</div>
@@ -117,7 +117,7 @@
                 align="center">
                 <template slot-scope="scope">
                     <el-button  type="text" size="small">停用</el-button>
-                    <el-button  type="text" size="small">修改</el-button>
+                    <el-button  type="text" size="small"  @click="changeUser">修改</el-button>
                     <el-button  type="text" size="small">删除</el-button>
                 </template>
             </el-table-column>
@@ -143,7 +143,7 @@
                     label-width="90px"
                     ref="changeUserInfo"
                     >
-                    <el-row class="online">
+                    <el-row >
                         <el-col :span="12">
                             <el-form-item label="店铺名:">
                                 <el-input v-model="editUserInfo.shop_name"></el-input>
@@ -157,16 +157,20 @@
                     </el-row>
                 
                      <el-row class="online">
-                        <el-col :span="20">
+                        <el-col :span="20" >
                             <el-form-item label="地址:">
                                 <el-input v-model="editUserInfo.shop_name"></el-input>
-                                <el-button type="primary">定位</el-button>
+                               
                             </el-form-item>
-                           
+                            
                         </el-col>
+                        <el-button type="primary positionBtn">定位</el-button>
                     </el-row>
                      
                 </el-form>
+                <div id="mapBox">
+
+                </div>
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="editUser">修改</el-button>
@@ -211,7 +215,7 @@ export default {
             tableData:[],
             dataTotal:20,//总数
             // 修改客户信息弹窗
-            dialogVisible1:true,
+            dialogVisible1:false,
             // 修改用户信息
             editUserInfo:{}
         }
@@ -220,9 +224,31 @@ export default {
         pageChange(){
 
         },
+        // 弹出修改框
+        changeUser(){
+            this.dialogVisible1=true;
+            setTimeout(() => {
+                this.initMap()
+            }, 2000);
+            
+        },
+        // 提交修改
         editUser(){
             this.dialogVisible1 = false
+        },
+        // 初始化地图
+        initMap(){
+            console.log(document.querySelector("#mapBox"))
+            this.map = new AMap.Map('mapBox',{
+                zoom:12,//级别
+                center: this.defaultXY,//中心点坐标
+                resizeEnable: true
+            });
+            this.map.setDefaultCursor("pointer");
+            // 添加比例尺
+            this.map.addControl(new AMap.Scale({ visible: true}))
         }
+
     },
 }
 </script>
@@ -253,6 +279,18 @@ export default {
     .tableArea{
         margin-top: 10px;
         text-align: center
+    }
+    .online{
+        display: flex;
+        .positionBtn{
+            margin-left: 10px;
+            height: 40px;
+        }
+    }
+    #mapBox{
+        margin-left: 50px;
+        width: 650px;
+        height: 300px;
     }
 </style>
 
