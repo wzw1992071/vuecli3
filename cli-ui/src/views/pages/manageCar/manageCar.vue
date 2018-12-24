@@ -3,7 +3,7 @@
     <div class="mainBox">
         <div class="header">车队管理</div>
         <div class="btnGroup flex">
-            <el-button type="primary">新增司机</el-button>
+            <el-button type="primary" @click="dialogVisible2=true">新增司机</el-button>
             <!-- <el-button type="primary">主要按钮</el-button> -->
             
         </div>
@@ -73,6 +73,72 @@
                 :total="dataTotal">
             </el-pagination>
         </div> 
+        <el-dialog
+            title="请新司机使用微信扫码"
+            :visible.sync="dialogVisible1"
+            :close-on-click-modal="false"
+            width="30%">
+            <div>
+                
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible1 = false">关闭</el-button>
+              
+            </span>
+        </el-dialog>
+        <el-dialog
+            title="修改信息"
+            :visible.sync="dialogVisible2"
+            :close-on-click-modal="false"
+            width="30%">
+            <div>
+                <el-form 
+                    label-width="90px"
+                    ref="changeUserInfo"
+                    >
+                    <el-row class="online">
+                        <el-col :span="20">
+                            <el-form-item label="店铺名:" prop="shop_name">
+                                <el-input v-model="changeInfo.shop_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                     <el-row class="online">
+                        <el-col :span="20">
+                            <el-form-item label="车号:" prop="shop_name">
+                                <el-input v-model="changeInfo.shop_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                     <el-row class="online">
+                        <el-col :span="20">
+                            <el-form-item label="手机号:" prop="shop_name">
+                                <el-input v-model="changeInfo.shop_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                     <el-row class="online">
+                        <el-col :span="20">
+                            <el-form-item label="打印机:" prop="shop_name">
+                                <!-- <el-input v-model="changeInfo.shop_name"></el-input> -->
+                                <el-select v-model="changeInfo.shop_type">
+                                    <el-option
+                                        v-for="item in printLists"
+                                        :key="item.id"
+                                        :label="item.name"
+                                        :value="item.id">
+                                    </el-option>
+                                </el-select> 
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-form>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible2 = false">取 消</el-button>
+                <el-button type="primary" @click="submitChangeInfo">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -83,10 +149,23 @@ export default {
             // 表格数据
             tableData:[],
             dataTotal:20,//总数
+            dialogVisible1:false,//新增司机弹窗
+            dialogVisible2:false,//修改司机信息弹窗
+            changeInfo:{}// 修改司机信息
+        }
+    },
+    computed:{
+        printLists(){
+            let prints= [];
+            return prints;
         }
     },
     methods: {
         pageChange(){
+
+        },
+        // 提交修改
+        submitChangeInfo(){
 
         }
     },
@@ -109,6 +188,12 @@ export default {
         margin-top: 10px;
         text-align: center
     }
+    .online{
+        .el-select{
+            width: 298px;
+        }
+    }
+   
 </style>
 
 

@@ -8,7 +8,7 @@
         </div>
         <div class="fileter flex">
             <div>筛选条件:</div>
-            <el-select v-model="isSend" placeholder="是否可送">
+            <el-select v-model="filter_isSend" placeholder="是否可送">
                 <el-option
                     v-for="item in selectData.isSend"
                     :key="item.value"
@@ -16,7 +16,7 @@
                     :value="item.value">
                 </el-option>
             </el-select>
-             <el-select v-model="isSend" placeholder="是否绑定微信">
+             <el-select v-model="filter_isSend" placeholder="是否绑定微信">
                 <el-option
                     v-for="item in selectData.isSend"
                     :key="item.value"
@@ -24,7 +24,7 @@
                     :value="item.value">
                 </el-option>
             </el-select>
-             <el-select v-model="isSend" placeholder="多久未送货">
+             <el-select v-model="filter_isSend" placeholder="多久未送货">
                 <el-option
                     v-for="item in selectData.isSend"
                     :key="item.value"
@@ -32,7 +32,7 @@
                     :value="item.value">
                 </el-option>
             </el-select>
-             <el-select v-model="isSend" placeholder="是否可送">
+             <el-select v-model="filter_isSend" placeholder="是否可送">
                 <el-option
                     v-for="item in selectData.isSend"
                     :key="item.value"
@@ -45,10 +45,7 @@
             <div>区域:</div>
             <div>
                 <el-radio-group v-model="filter_Area">
-                    <el-radio-button label="0">青羊区</el-radio-button>
-                    <el-radio-button label="1">新都区</el-radio-button>
-                    <el-radio-button label="2">武侯区</el-radio-button>
-                    <el-radio-button label="3">高兴区</el-radio-button>
+                    <el-radio-button v-for="item in selectData.area" :key="item.value" :label="item.value">{{item.label}}</el-radio-button>
                 </el-radio-group>
             </div>
         </div>
@@ -136,6 +133,47 @@
                 :total="dataTotal">
             </el-pagination>
         </div> 
+        <el-dialog
+            title="修改信息"
+            :visible.sync="dialogVisible1"
+            :close-on-click-modal="false"
+            width="50%">
+            <div>
+                <el-form 
+                    label-width="90px"
+                    ref="changeUserInfo"
+                    >
+                    <el-row class="online">
+                        <el-col :span="12">
+                            <el-form-item label="店铺名:">
+                                <el-input v-model="editUserInfo.shop_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                         <el-col :span="12">
+                            <el-form-item label="手机号:" >
+                                <el-input v-model="editUserInfo.shop_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                
+                     <el-row class="online">
+                        <el-col :span="20">
+                            <el-form-item label="地址:">
+                                <el-input v-model="editUserInfo.shop_name"></el-input>
+                                <el-button type="primary">定位</el-button>
+                            </el-form-item>
+                           
+                        </el-col>
+                    </el-row>
+                     
+                </el-form>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="editUser">修改</el-button>
+                <el-button @click="dialogVisible1 = false">关闭</el-button>
+              
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -149,19 +187,41 @@ export default {
             pageSize:50,//每页数据
             // 筛选条件
             filter_isSend:"",
-            filter_Area:"",
+            filter_Area:"1",
             // 筛选下拉框
             selectData:{
-                isSend:[]
+                isSend:[],
+               area:[{
+                    label:"青羊区",
+                    value:"1"
+                },{
+                    label:"武侯区",
+                    value:"2"
+                },
+                {
+                    label:"新都区",
+                    value:"3"
+                },
+                {
+                    label:"高新区",
+                    value:"4"
+                }],
             },
             // 表格数据
             tableData:[],
             dataTotal:20,//总数
+            // 修改客户信息弹窗
+            dialogVisible1:true,
+            // 修改用户信息
+            editUserInfo:{}
         }
     },
     methods: {
         pageChange(){
 
+        },
+        editUser(){
+            this.dialogVisible1 = false
         }
     },
 }

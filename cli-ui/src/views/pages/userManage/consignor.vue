@@ -1,11 +1,23 @@
 // 发货人
 <template>
     <div class="mainBox">
-        <div class="header">收发货人管理</div>
-        <div class="btnGroup flex">
-            <el-button type="primary">新增司机</el-button>
-            <!-- <el-button type="primary">主要按钮</el-button> -->
-            
+        <div class="header">发货人管理</div>
+        <div class="searchArea flex">
+            <el-input class="searchInput" v-model="keyWord" placeholder="收货人名、手机号、微信名"></el-input>
+            <el-button type="primary">搜索</el-button>
+            <el-button type="primary">导出</el-button>
+        </div>
+        <div class="fileter flex">
+            <div>筛选条件:</div>
+            <el-select v-model="shopType" placeholder="店铺类型">
+                <el-option
+                    v-for="item in selectData.shopType"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+            </el-select>
+          
         </div>
         
         <div class="tableArea">
@@ -16,37 +28,31 @@
             >
             <el-table-column
                 prop="shop_name"
-                label="姓名"
+                label="发货人"
                 min-width="150"
                 align="center">
             </el-table-column>
              <el-table-column
                 prop="name"
-                label="车号"
+                label="手机号"
                 min-width="150"
                 align="center">
             </el-table-column>
              <el-table-column
                 prop="phone"
-                label="电话"
+                label="绑定微信"
                 min-width="150"
                 align="center">
             </el-table-column>
              <el-table-column
                 prop="address"
-                label="微信名"
+                label="类型"
                 min-width="150"
                 align="center">
             </el-table-column>
             <el-table-column
                 prop="shop_type_name"
-                label="K单打印机"
-                min-width="150"
-                align="center">
-            </el-table-column>
-             <el-table-column
-                prop="shop_type_name"
-                label="状态"
+                label="发货次数"
                 min-width="150"
                 align="center">
             </el-table-column>
@@ -83,6 +89,14 @@ export default {
             // 表格数据
             tableData:[],
             dataTotal:20,//总数
+            // 搜索关键词
+            keyWord:"",
+            // 店铺类型
+            shopType:"",
+            // 下拉框数据
+            selectData:{
+                shopType:[]
+            }
         }
     },
     methods: {
@@ -100,10 +114,21 @@ export default {
         font-size: 24px;
         font-weight: bolder;
     }
-    .btnGroup{
-        justify-content: flex-end;
-        padding-right: 10px;
+    .searchArea{
+        margin: 10px 0;
+       .searchInput{
+       
+           width: 300px;
+           margin-right: 10px;
+       }
         
+    }
+    .fileter{
+        margin: 10px;
+        &>div{
+            line-height: 40px;
+            margin-right: 10px;
+        }
     }
     .tableArea{
         margin-top: 10px;
