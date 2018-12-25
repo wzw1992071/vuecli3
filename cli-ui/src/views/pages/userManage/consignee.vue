@@ -5,6 +5,7 @@
         <div class="searchArea flex">
             <el-input class="searchInput" v-model="keyWord" placeholder="收货人名、手机号、微信名"></el-input>
             <el-button type="primary" @click="changeUser">搜索</el-button>
+           
         </div>
         <div class="fileter flex">
             <div>筛选条件:</div>
@@ -159,12 +160,12 @@
                      <el-row class="online">
                         <el-col :span="20" >
                             <el-form-item label="地址:">
-                                <el-input v-model="editUserInfo.shop_name"></el-input>
+                                <el-input v-model="editUserInfo.address"></el-input>
                                
                             </el-form-item>
                             
                         </el-col>
-                        <el-button type="primary positionBtn">定位</el-button>
+                        <el-button type="primary positionBtn" @click="getPosition">定位</el-button>
                     </el-row>
                      
                 </el-form>
@@ -173,6 +174,7 @@
                 </div>
             </div>
             <span slot="footer" class="dialog-footer">
+                 <el-button type="primary" @click="clear">清除</el-button>
                 <el-button type="primary" @click="editUser">修改</el-button>
                 <el-button @click="dialogVisible1 = false">关闭</el-button>
               
@@ -211,6 +213,10 @@ export default {
                     value:"4"
                 }],
             },
+            // 地图对象
+            map:{},
+            // 地图根据名字搜索
+            placeSearch:{},
             // 表格数据
             tableData:[],
             dataTotal:20,//总数
@@ -229,7 +235,7 @@ export default {
             this.dialogVisible1=true;
             setTimeout(() => {
                 this.initMap()
-            }, 2000);
+            }, 1000);
             
         },
         // 提交修改
@@ -238,7 +244,7 @@ export default {
         },
         // 初始化地图
         initMap(){
-            console.log(document.querySelector("#mapBox"))
+            // console.log(document.querySelector("#mapBox"))
             this.map = new AMap.Map('mapBox',{
                 zoom:12,//级别
                 center: this.defaultXY,//中心点坐标
@@ -247,6 +253,49 @@ export default {
             this.map.setDefaultCursor("pointer");
             // 添加比例尺
             this.map.addControl(new AMap.Scale({ visible: true}))
+            this.map.clearMap()
+        },
+        // 定位
+        getPosition(){
+            if(this.editUserInfo.address){
+                this.placeSearch = new AMap.PlaceSearch({
+                    city: '028'
+                })
+                this.placeSearch.search(this.editUserInfo.address,  (status, result)=>{
+                // 查询成功时，result即对应匹配的POI信息
+                    this.map.clearMap()
+                    console.log(result)
+                    if(_.isEmpty(result)){
+                        this.$message({
+                            message: "请输入正确地址",
+                            type: "warning"
+                        });
+                    }else{
+                        let pois = result.poiList.pois;
+                        let marker = new AMap.Marker({
+                            position: pois[0].location,   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+                            title: pois[0].name
+                        });
+                        this.map.add(marker);
+                        this.map.setFitView();
+                        marker.on('dragging', (e)=>{
+                            console.log(e)
+                        })
+                    }
+                   
+
+                })
+            }else{
+                this.$message({
+                    message: "请输入地址",
+                    type: "warning"
+                });
+            }
+            
+
+        },
+        clear(){
+            this.map.clearMap()
         }
 
     },
