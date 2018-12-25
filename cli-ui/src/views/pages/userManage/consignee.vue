@@ -223,7 +223,10 @@ export default {
             // 修改客户信息弹窗
             dialogVisible1:false,
             // 修改用户信息
-            editUserInfo:{}
+            editUserInfo:{
+                name:"定位",
+                coordinate:[104.087364, 30.720576]
+            }
         }
     },
     methods: {
@@ -234,7 +237,19 @@ export default {
         changeUser(){
             this.dialogVisible1=true;
             setTimeout(() => {
-                this.initMap()
+                this.initMap();
+                if(this.editUserInfo.coordinate){
+                    let marker = new AMap.Marker({
+                        position: this.editUserInfo.coordinate,   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+                        title: this.editUserInfo.name,
+                        draggable: true
+                    });
+                    this.map.add(marker);
+                    this.map.setFitView();
+                    marker.on('dragend', (e)=>{
+                        console.log(e)
+                    })
+                }
             }, 1000);
             
         },
@@ -253,7 +268,7 @@ export default {
             this.map.setDefaultCursor("pointer");
             // 添加比例尺
             this.map.addControl(new AMap.Scale({ visible: true}))
-            this.map.clearMap()
+            
         },
         // 定位
         getPosition(){
@@ -274,11 +289,12 @@ export default {
                         let pois = result.poiList.pois;
                         let marker = new AMap.Marker({
                             position: pois[0].location,   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-                            title: pois[0].name
+                            title: pois[0].name,
+                            draggable: true
                         });
                         this.map.add(marker);
                         this.map.setFitView();
-                        marker.on('dragging', (e)=>{
+                        marker.on('dragend', (e)=>{
                             console.log(e)
                         })
                     }
