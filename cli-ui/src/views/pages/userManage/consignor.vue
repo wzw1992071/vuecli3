@@ -79,6 +79,56 @@
                 :total="dataTotal">
             </el-pagination>
         </div> 
+        <el-dialog
+            title="修改信息"
+            :visible.sync="dialogVisible1"
+            :close-on-click-modal="false"
+            width="30%">
+            <div>
+                <el-form 
+                    label-width="90px"
+                    >
+                    <el-row >
+                        
+                        <el-col :span="20">
+                            <el-form-item label="发货人:" >
+                                <el-input v-model="editUserInfo.shop_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                     <el-row >
+                        
+                        <el-col :span="20">
+                            <el-form-item label="手机号:" >
+                                <el-input v-model="editUserInfo.shop_name"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row >
+                        
+                        <el-col :span="20">
+                            <el-form-item label="类型:" >
+                                <el-select v-model="editUserInfo.shopType" placeholder="店铺类型">
+                                    <el-option
+                                        v-for="item in selectData.shopType"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+
+                </el-form>
+ 
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="editUser">修改</el-button>
+                <el-button @click="dialogVisible1 = false">关闭</el-button>
+              
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -96,11 +146,19 @@ export default {
             // 下拉框数据
             selectData:{
                 shopType:[]
-            }
+            },
+            // 修改弹窗是否显示
+            dialogVisible1:false,
+            // 修改用户信息
+            editUserInfo:{}
         }
     },
     methods: {
         pageChange(){
+
+        },
+        // 提交修改
+        editUser(){
 
         }
     },

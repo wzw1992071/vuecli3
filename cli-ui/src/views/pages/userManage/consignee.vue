@@ -167,6 +167,20 @@
                         </el-col>
                         <el-button type="primary positionBtn" @click="getPosition">定位</el-button>
                     </el-row>
+                    <el-row >
+                        <el-col :span="10">
+                            <el-form-item label="街道:">
+                                <el-input v-model="editUserInfo.district"></el-input>
+                               
+                            </el-form-item>
+                         
+                        </el-col>
+                        <el-col :span="10">
+                            <el-form-item label="————" >
+                                <el-input v-model="editUserInfo.town"></el-input>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
                      
                 </el-form>
                 <div id="mapBox">
@@ -225,7 +239,13 @@ export default {
             // 修改用户信息
             editUserInfo:{
                 name:"定位",
-                coordinate:[104.087364, 30.720576]
+                coordinate:[104.087364, 30.720576],
+                province:"",
+                city:"",
+                district:"",
+                town:"",
+                street:""
+
             }
         }
     },
@@ -246,9 +266,7 @@ export default {
                     });
                     this.map.add(marker);
                     this.map.setFitView();
-                    marker.on('dragend', (e)=>{
-                        console.log(e)
-                    })
+                    marker.on('dragend',e=>this.dragendEvent(e))
                 }
             }, 1000);
             
@@ -294,9 +312,13 @@ export default {
                         });
                         this.map.add(marker);
                         this.map.setFitView();
-                        marker.on('dragend', (e)=>{
-                            console.log(e)
+                        this.dragendEvent({
+                            lnglat:{
+                                lng:pois[0].location.lng,
+                                lat:pois[0].location.lat
+                            }
                         })
+                        marker.on('dragend',  e=>this.dragendEvent(e))
                     }
                    
 
@@ -310,11 +332,34 @@ export default {
             
 
         },
-        clear(){
+        // 地图上maker移动后的事件
+        dragendEvent(e){
+            this.editUserInfo.coordinate=[e.lnglat.lng,e.lnglat.lat]
+            let geocoder = new qq.maps.Geocoder({
+                complete:(result)=>{
+                    console.log(result);
+                    console.log(this.editUserInfo)
+                    this.editUserInfo=Object.assign(this.editUserInfo, {
+                        province:result.detail.addressComponents.province,
+                        city:result.detail.addressComponents.city,
+                        district:result.detail.addressComponents.district,
+                        town:result.detail.addressComponents.town,
+                        street:result.detail.addressComponents.street,
+                    });
+                }
+            });
+            var coord=new qq.maps.LatLng(e.lnglat.lat,e.lnglat.lng);
+            geocoder.getAddress(coord);
+        },
+        
+         clear(){
             this.map.clearMap()
         }
 
     },
+    created(){
+        
+    }
 }
 </script>
 <style lang="less" scoped>
