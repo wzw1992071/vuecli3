@@ -32,11 +32,11 @@ export default {
         routeLists: [
           { 
               index:"1",  
-              name:"订单首页",
+              name:"开单",
               childs:[
-                {index:"1-1",  name:"首页",path:"/index"},
-                {index:"1-2",  name:"冻参谋导入",path:"/addOrder"},
-                {index:"1-3",  name:"测试",path:"/test"},
+                {index:"1-1",  name:"开单",path:"/openOrder"},
+                {index:"1-2",  name:"运单列表",path:"/orderList"},
+                
               ]
           },
           { 
@@ -71,6 +71,16 @@ export default {
                
               ]
           },
+          { 
+              index:"6",  
+              name:"系统配置",
+              childs:[
+                {index:"6-1",  name:"K单过滤",path:"/Kfilter"},
+                {index:"6-4",  name:"包车信息",path:"/charterInfo"},
+               
+              ]
+          },
+          
                
         ]
     }

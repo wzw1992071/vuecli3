@@ -11,18 +11,18 @@ export default new Router({
       name: 'Box',
       component: _import('index'),
       children:[
+      // 开单
+        // 运单列表
         {
-          path: 'index', 
-          component: _import('pages/index/index')
+          path: 'orderList', 
+          component: _import('pages/openOrder/orderList')
         },
+        // 开单
         {
-          path: 'addOrder', 
-          component: _import('pages/index/addOrder')
+          path: 'openOrder', 
+          component: _import('pages/openOrder/openOrder')
         },
-        {
-          path: 'test', 
-          component: _import('pages/index/test')
-        },
+        
     // 智能分配
         // 实时分配
         {
@@ -55,6 +55,18 @@ export default new Router({
           path: 'areaSetting', 
           component: _import('pages/areaSetting/areaSetting')
         },
+    // 系统设置
+        // K单过滤
+        {
+          path: 'charterInfo', 
+          component: _import('pages/systemSetting/charterInfo')
+        },
+        // 包车信息
+        {
+          path: 'Kfilter', 
+          component: _import('pages/systemSetting/Kfilter')
+        },
+    
       ]
     },
     
