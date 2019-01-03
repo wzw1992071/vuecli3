@@ -80,6 +80,15 @@ export default {
                
               ]
           },
+          { 
+              index:"10",  
+              name:"测试",
+              childs:[
+                {index:"10-1",  name:"测试",path:"/test"},
+              
+               
+              ]
+          },
           
                
         ]

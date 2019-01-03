@@ -66,6 +66,11 @@ export default new Router({
           path: 'Kfilter', 
           component: _import('pages/systemSetting/Kfilter')
         },
+        // 测试页面
+        {
+          path: 'test', 
+          component: _import('pages/test/test')
+        },
     
       ]
     },
