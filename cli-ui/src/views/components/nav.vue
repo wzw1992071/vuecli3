@@ -85,6 +85,7 @@ export default {
               name:"测试",
               childs:[
                 {index:"10-1",  name:"测试",path:"/test"},
+                {index:"10-2",  name:"测试2",path:"/test2"},
               
                
               ]

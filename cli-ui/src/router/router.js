@@ -71,6 +71,10 @@ export default new Router({
           path: 'test', 
           component: _import('pages/test/test')
         },
+        {
+          path: 'test2', 
+          component: _import('pages/test/test2')
+        },
     
       ]
     },
