@@ -5,7 +5,7 @@ const getters={
     currentTab:state => state.currentTab,
     realDispatchDiver:state => state.realDispatchDiver,
     exceptDispatchDiver:state => state.exceptDispatchDiver,
-    
+    printList:state => state.printList,
 }
 
 export default getters;

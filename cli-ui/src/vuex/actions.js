@@ -35,5 +35,24 @@ export default {
     // 预分配
     saveExceptDrive({commit},obj){
         commit('SAVEEXCEPTDRIVER',obj)
+    },
+    // 获取打印机列表
+    getPrintList({state,commit}){
+        // console.log(getLodop)
+        // commit('SAVEEXCEPTDRIVER',obj)
+        if(state.printList.length==0){
+            
+            let LODOP = getLodop();
+            let printNumber =  LODOP.GET_PRINTER_COUNT()
+            let printList = []
+            for(let i=0;i<printNumber;i++){
+                printList.push({
+                   value:LODOP.GET_PRINTER_NAME(i)
+                })
+            }
+            commit('GETPRINTLIST',printList)
+        }else{
+            return false
+        }
     }
 }

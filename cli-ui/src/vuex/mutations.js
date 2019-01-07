@@ -36,5 +36,8 @@ export default {
     SAVEEXCEPTDRIVER(states,obj){
         states.exceptDispatchDiver = obj
     },
+    GETPRINTLIST(states,printList){
+        states.printList = printList
+    }
 
 }
