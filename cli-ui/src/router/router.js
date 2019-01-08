@@ -61,6 +61,11 @@ export default new Router({
           path: 'charterInfo', 
           component: _import('pages/systemSetting/charterInfo')
         },
+        // 打印机设置
+        {
+          path: 'printSetting', 
+          component: _import('pages/systemSetting/printSetting')
+        },
         // 包车信息
         {
           path: 'Kfilter', 

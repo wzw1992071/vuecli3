@@ -76,6 +76,7 @@ export default {
               name:"系统配置",
               childs:[
                 {index:"6-1",  name:"K单过滤",path:"/Kfilter"},
+                {index:"6-2",  name:"打印机设置",path:"/printSetting"},
                 {index:"6-4",  name:"包车信息",path:"/charterInfo"},
                
               ]
