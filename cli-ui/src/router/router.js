@@ -56,7 +56,7 @@ export default new Router({
           component: _import('pages/areaSetting/areaSetting')
         },
     // 系统设置
-        // K单过滤
+        // 包车信息
         {
           path: 'charterInfo', 
           component: _import('pages/systemSetting/charterInfo')
@@ -66,12 +66,17 @@ export default new Router({
           path: 'printSetting', 
           component: _import('pages/systemSetting/printSetting')
         },
-        // 包车信息
+        // K单过滤
         {
           path: 'Kfilter', 
           component: _import('pages/systemSetting/Kfilter')
         },
-        // 测试页面
+        // 其他设置
+        {
+          path: 'otherSetting', 
+          component: _import('pages/systemSetting/otherSetting')
+        },
+    // 测试页面
         {
           path: 'test', 
           component: _import('pages/test/test')
