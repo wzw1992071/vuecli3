@@ -9,7 +9,7 @@ import store from "@/vuex/store"
 // 引入公共方法
 import utils from "@/utils/utils.js"
 Vue.prototype.$utils = utils
-
+window.$utils = utils
 //初始化css样式
 import "@/assets/css/normalize.less"
 

@@ -10,6 +10,7 @@
                 </el-option>
             </el-select>
             <el-button type="primary" @click="print">打印</el-button>
+            <el-button type="primary" @click="testA(3)">测试</el-button>
         </div>
     </div>
 </template>
@@ -20,7 +21,10 @@ export default {
     name:"Test",
     data(){
         return{
-            printName:""
+            printName:"",
+            myFn:{
+
+            }
         }
     },
     computed:{
@@ -45,14 +49,47 @@ export default {
             LODOP.SET_PRINTER_INDEX(this.printName)
             LODOP.SET_PRINT_MODE("AUTO_CLOSE_PREWINDOW", 1); //打印后自动关闭预览窗口
             LODOP.PREVIEW();
+        },
+        testA:(()=>{
+            let fn=$utils.throttle(function(n){
+                console.log(n)
+            },2000)
+            return function(){fn.apply(this,arguments)}
+        })(),
+        testProxy(){
+            let  a={
+                name:"xiaoMing",
+                age:18
+            }
+            let obj = new Proxy(a, {
+                get(target, property){
+                    console.log(target)
+                    console.log(property)
+                    // if (property in target) {
+                    //     return 1;
+                    // } else {
+                    //     throw new ReferenceError("Property \"" + property + "\" does not exist.");
+                    // }
+                }
+                
+            })
+            obj.name
         }
+        // consoleNumber(n){
+        //     console.log(n)
+        // },
+        // detealFn(){
+        //     this.myFn.consoleNumber=this.$utils.throttle(this.consoleNumber)
+        // }
     },
     created(){
         // var LODOP = getLodop();
         // // LODOP.PRINT_INIT("打印销售单");
         // console.log(LODOP.GET_PRINTER_NAME(0))
-        this.getPrintList()
-    }
+        this.getPrintList();
+        this.testProxy()
+        // this.detealFn()
+    },
 }
 </script>
 <style lang="less" scoped>

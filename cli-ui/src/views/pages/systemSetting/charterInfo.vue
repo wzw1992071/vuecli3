@@ -5,6 +5,9 @@
        <div>
             <el-button type="primary">保存</el-button>
        </div>
+       <div v-html="msg">
+          
+       </div>
     </div>
     
 </template>
