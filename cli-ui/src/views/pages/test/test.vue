@@ -31,7 +31,10 @@ export default {
         ...mapGetters(["printList"])
     },
     methods:{
-        ...mapActions(["getPrintList"]),
+        // ...mapActions(["getPrintList"]),
+        ...mapActions({
+            getPrintList:"getPrintList"
+        }),
         print(){
             var LODOP = getLodop();
             LODOP.PRINT_INIT("打印销售单");
