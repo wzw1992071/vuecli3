@@ -1,0 +1,20 @@
+{
+    "code":0,
+    "message":"OK",
+    "data":{
+        "page":1,
+        "total":260,
+        "lists":[{
+            "id":"sdjfxodfsdkfjswjkisjdw",
+            "shop_name":"杨四冻货",
+            "name":"杨四",
+            "phone":"13212345678",
+            "we_name":"杨叉叉",
+            "we_openid":"fsfsdfsdfsdfsdf",
+            "we_portrait":"https://we.xxx.com/sfsdfsdf",
+            "type":1,
+            "delivery_num":6,
+            "remark":"备注信息"
+        }]
+    }
+}

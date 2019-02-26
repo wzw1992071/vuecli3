@@ -260,3 +260,20 @@ export function getConsigneesTownStatus(){
         }) 
     }
 }
+
+// 发货人列表
+export function getCustomerShipperList(sendParam){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/customer-shipper-list.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.get(`/oa/customer/shipper/list`,{params:sendParam}).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}
