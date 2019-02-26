@@ -6,6 +6,7 @@ const getters={
     realDispatchDiver:state => state.realDispatchDiver,
     exceptDispatchDiver:state => state.exceptDispatchDiver,
     printList:state => state.printList,
+    customerData:state => state.customerData,
 }
 
 export default getters;

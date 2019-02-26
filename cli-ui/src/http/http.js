@@ -210,3 +210,53 @@ export function townUpdate(id,params){
         }) 
     }
 }
+
+// 获取客户类型
+export function getCustomerType(){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/customer-type.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.get(`/oa/customer/type/list`).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}
+
+// 获取收货地址状态说明
+export function getConsigneesAddrStatus(){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/consignees-addr-status.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.get(`/oa/customer/consignees/addr/status/list`).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}
+// 获取区域状态说明
+export function getConsigneesTownStatus(){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/consignees-addr-status.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.get(`/oa/customer/consignees/addr/town/status/list`).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}

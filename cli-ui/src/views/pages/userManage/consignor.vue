@@ -132,6 +132,7 @@
     </div>
 </template>
 <script>
+import {mapActions,mapGetters} from "vuex";
 export default {
     name:"Consignor",
     data() {
@@ -153,15 +154,23 @@ export default {
             editUserInfo:{}
         }
     },
+    computed: {
+        ...mapGetters(["customerData"])
+    },
     methods: {
+        ...mapActions(["getCustomerData"]),
         pageChange(){
 
         },
         // 提交修改
         editUser(){
 
-        }
+        },
+
     },
+    created(){
+        this.getCustomerData()
+    }
 }
 </script>
 <style lang="less" scoped>

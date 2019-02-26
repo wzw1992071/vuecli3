@@ -38,6 +38,9 @@ export default {
     },
     GETPRINTLIST(states,printList){
         states.printList = printList
+    },
+    GETCUSTOMERDATA(states,customerData){
+        states.customerData = customerData
     }
 
 }

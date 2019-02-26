@@ -38,8 +38,6 @@ export default {
     },
     // 获取打印机列表
     getPrintList({state,commit}){
-        // console.log(getLodop)
-        // commit('SAVEEXCEPTDRIVER',obj)
         if(state.printList.length==0){
             
             let LODOP = getLodop();
@@ -51,6 +49,25 @@ export default {
                 })
             }
             commit('GETPRINTLIST',printList)
+        }else{
+            return false
+        }
+    },
+    // 获取客户通用数据
+    getCustomerData({state,commit}){
+        // console.log(Object.keys(state.customerData)
+        if(Object.keys(state.customerData).length==0){
+            // $http.getCustomerType().then(res=>{
+            //     console.log(res)
+            // })
+            Promise.all([$http.getCustomerType(),$http.getConsigneesAddrStatus(),$http.getConsigneesTownStatus()]).then(res=>{
+                let data = {
+                    customerType:res[0].data,
+                    consigneesAddrStatus:res[1].data,
+                    consigneesTownStatus:res[2].data
+                }
+                commit('GETCUSTOMERDATA',data)
+            })
         }else{
             return false
         }
