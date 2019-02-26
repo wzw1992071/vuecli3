@@ -1,0 +1,11 @@
+{
+    "code":0,
+    "message":"OK",
+    "data":{
+        "content":{
+            "base_price":40,
+            "discount":8
+        },
+        "remark":"配置备注信息"
+    }
+}

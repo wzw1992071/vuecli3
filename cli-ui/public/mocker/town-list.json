@@ -1,0 +1,18 @@
+{
+    "code":0,
+    "message":"OK",
+    "data":[
+        {
+            "id":6,
+            "county_id":510107,
+            "county_name":"郫都区",
+            "town_id":"510112",
+            "town_name":"犀浦镇",
+            "map_name":"郫县",
+            "customer_num":160,
+            "status":1,
+            "base_price":6,
+            "remark":"备注信息"
+        }
+    ]
+}

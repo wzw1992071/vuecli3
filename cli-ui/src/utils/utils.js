@@ -102,4 +102,12 @@ export default {
         }
         return fmt;
     },
+    // 电话验证
+    validatePhone(number){
+        if((/^1[34578]\d{9}$/.test(number))){ 
+            return true; 
+        }else{
+            return false; 
+        }
+    }
 }

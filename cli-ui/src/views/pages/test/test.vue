@@ -60,23 +60,9 @@ export default {
             return function(){fn.apply(this,arguments)}
         })(),
         testProxy(){
-            let  a={
-                name:"xiaoMing",
-                age:18
-            }
-            let obj = new Proxy(a, {
-                get(target, property){
-                    console.log(target)
-                    console.log(property)
-                    // if (property in target) {
-                    //     return 1;
-                    // } else {
-                    //     throw new ReferenceError("Property \"" + property + "\" does not exist.");
-                    // }
-                }
-                
-            })
-            obj.name
+           this.$http.test().then(res=>{
+               console.log(res)
+           })
         }
         // consoleNumber(n){
         //     console.log(n)

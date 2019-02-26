@@ -3,11 +3,12 @@ import {Loading, Message, MessageBox} from 'element-ui'
 import Axios from 'axios'
 
 let BaseUrl = ""
-if(process.env.NODE_ENV=='development'){
-  BaseUrl = "/api"
-}else if((process.env.NODE_ENV=='production')){
-  BaseUrl = ""
-}
+// 如果接口通了就打开这一段，代理线上数据
+// if(process.env.NODE_ENV=='development'){
+//   BaseUrl = "/api"
+// }else if((process.env.NODE_ENV=='production')){
+//   BaseUrl = ""
+// }
 
 console.log(BaseUrl)
 var axios = Axios.create({
@@ -31,7 +32,7 @@ axios.interceptors.request.use(function(config){
     Message.error({
         message:"请求超时"
     })
-  return new Promise.reject(error);
+  return Promise.reject(err);
 });
 //添加一个响应拦截器
 axios.interceptors.response.use(function(res){
@@ -51,7 +52,7 @@ axios.interceptors.response.use(function(res){
         message:`请求失败:${res.data.message}`
     })
     console.log(`请求失败:${res.data.message}`)
-    return new Promise.reject("请求失败");
+    return  Promise.reject("请求失败");
   }
 
   return res.data;
@@ -62,7 +63,7 @@ axios.interceptors.response.use(function(res){
     Message.error({
         message:"请求失败"
     })
-  return new Promise.reject("请求失败");
+  return  Promise.reject("请求失败");
 })
 
 export default axios
