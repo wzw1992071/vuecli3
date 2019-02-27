@@ -277,3 +277,20 @@ export function getCustomerShipperList(sendParam){
         }) 
     }
 }
+
+// 修改发货人
+export function shipperUpdate(id,sendParam){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/commonBack.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.post(`/oa/customer/shipper/update/${id}`,sendParam).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}

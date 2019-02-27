@@ -3,39 +3,37 @@
     <div class="mainBox">
         <div class="header">收货人管理</div>
         <div class="searchArea flex">
-            <el-input class="searchInput" v-model="keyWord" placeholder="收货人名、手机号、微信名"></el-input>
-            <el-button type="primary" @click="changeUser">搜索</el-button>
-           
+            <el-input class="searchInput" v-model="searchParam.keyWord" clearable placeholder="收货人名、手机号、微信名"></el-input>
         </div>
         <div class="fileter flex">
             <div>筛选条件:</div>
-            <el-select v-model="filter_isSend" placeholder="是否可送">
+            <el-select v-if="customerData&&customerData.consigneesAddrStatus" v-model="searchParam.area_town_status" clearable placeholder="区域可送">
                 <el-option
-                    v-for="item in selectData.isSend"
+                    v-for="item in customerData.consigneesAddrStatus"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
+                </el-option>
+            </el-select>
+             <el-select v-model="searchParam.filter_wechat_bind" clearable placeholder="是否绑定微信">
+                <el-option
+                    v-for="item in selectData.wechatBindList"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
                 </el-option>
             </el-select>
-             <el-select v-model="filter_isSend" placeholder="是否绑定微信">
+             <el-select v-if="customerData&&customerData.consigneesTownStatus" v-model="searchParam.consignee_address_status" clearable placeholder="是否加入黑名单">
                 <el-option
-                    v-for="item in selectData.isSend"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
+                    v-for="item in customerData.consigneesTownStatus"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
                 </el-option>
             </el-select>
-             <el-select v-model="filter_isSend" placeholder="多久未送货">
+             <el-select v-model="searchParam.more_address" clearable placeholder="多店用户">
                 <el-option
-                    v-for="item in selectData.isSend"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                </el-option>
-            </el-select>
-             <el-select v-model="filter_isSend" placeholder="是否可送">
-                <el-option
-                    v-for="item in selectData.isSend"
+                    v-for="item in selectData.moreAddressList"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -45,10 +43,11 @@
         <div class="fileter flex">
             <div>区域:</div>
             <div>
-                <el-radio-group v-model="filter_Area">
-                    <el-radio-button v-for="item in selectData.area" :key="item.value" :label="item.value">{{item.label}}</el-radio-button>
+                <el-radio-group v-model="searchParam.filter_Area" >
+                     <el-radio-button v-for="item in selectData.area" :key="item.id" :label="item.id">{{item.name}}</el-radio-button>
                 </el-radio-group>
             </div>
+             <el-button type="primary" @click="pageChange(0)">搜索</el-button>
         </div>
         
         <div class="tableArea">
@@ -197,20 +196,29 @@
     </div>
 </template>
 <script>
+import {mapActions,mapGetters} from "vuex";
 export default {
     name:"Consignee",
     data() {
         return {
             // 搜索条件
-            keyWord:"",//关键词
-            page:1,//当前页
-            pageSize:50,//每页数据
-            // 筛选条件
-            filter_isSend:"",
-            filter_Area:"1",
+            searchParam:{
+                keyWord:"",//关键词
+                page:1,//当前页
+                pageSize:50,//每页数据
+                // 筛选条件
+                filter_consignee_address_status:"",
+                consignee_address_status:"",
+                area_town_status:"",
+                more_address:"",
+                filter_Area:"",
+            },
+           
             // 筛选下拉框
             selectData:{
                 isSend:[],
+                moreAddressList:[{ label:"是",value:"1"},{ label:"不是",value:"0"}],//是否为多店永辉
+                wechatBindList:[{ label:"已绑定微信",value:"1"},{ label:"未绑定微信",value:"0"}],//是否绑定微信
                area:[{
                     label:"青羊区",
                     value:"1"
@@ -249,9 +257,31 @@ export default {
             }
         }
     },
+    computed:{
+        ...mapGetters(["customerData"]),
+        getListParam(){
+            let data ={size:50};
+            if(this.keyWord){
+                data[this.serachType]=this.keyWord;
+            }
+            if(this.shopType){
+                data.type=this.shopType;
+            }
+            data.page=this.page;
+            return data
+        },
+    },
     methods: {
+        ...mapActions(["getCustomerData"]),
         pageChange(){
-
+          
+        },
+        // 获取区域列表
+        getAreaList(){
+            this.$http.countyList().then(res=>{
+                this.selectData.area=res.data
+                this.selectData.area.unshift({id:"",name:"全部"})
+            })
         },
         // 弹出修改框
         changeUser(){
@@ -352,13 +382,14 @@ export default {
             geocoder.getAddress(coord);
         },
         
-         clear(){
+        clear(){
             this.map.clearMap()
         }
 
     },
     created(){
-        
+        this.getAreaList();
+        this.getCustomerData()
     }
 }
 </script>
