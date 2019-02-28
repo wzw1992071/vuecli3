@@ -1,0 +1,33 @@
+{
+    "code":0,
+    "message":"OK",
+    "data":{
+        "page":1,
+        "total":150,
+        "lists":[{
+            "consignee_id":"sdjfxodfsdkfjswjkisjdw",
+            "address_id":"sdadqwerqwewqeqwwe",
+            "shop_name":"杨四冻货",
+            "we_portrait":"https://we.xxx.com/sfsdfsdf",
+            "we_name":"杨叉叉",
+            "we_openid":"fsfsdfsdfsdfsdf",
+            "consignee_name":"杨二叉",
+            "consignee_phone":"13212345678",
+            "province_id":510000,
+            "province":"四川省",
+            "city_id":510100,
+            "city":"成都市",
+            "county_id":510106,
+            "county":"武侯区",
+            "town_id":51010608,
+            "town_name":"芳草街道",
+            "town_addr":"创业路49号3楼(找冻品网)",
+            "map_addr":"创业路49号",
+            "lng":108,
+            "lat":66,
+            "status":1,
+            "area_status":5,
+            "delivery_num":0
+        }]
+    }
+}

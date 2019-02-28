@@ -294,3 +294,72 @@ export function shipperUpdate(id,sendParam){
         }) 
     }
 }
+
+// 收货人列表
+export function consigneesAddrList(sendParam){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/consignees-addr-list.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.get(`/oa/customer/consignees/addr/status/list`).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}
+
+// 收货地址状态修改
+export function consigneesAddrStatus(id){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/commonBack.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.put(`/oa/customer/consignees/addr/status/${id}`).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}
+
+// 收货地址删除
+export function consigneesAddrDelete(id){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/commonBack.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.delete(`/oa/customer/consignees/addr/${id}`).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}
+
+// 收货地址状修改
+export function consigneesAddrEdit(id,sendParam){
+    if(process.env.NODE_ENV=='development'){
+        return new Promise((resolve,reject)=>{
+            axios.get("/mocker/commonBack.json").then(res=>{
+                resolve(res)
+            })
+        }) 
+    }else if((process.env.NODE_ENV=='production')){
+        return new Promise((resolve,reject)=>{
+            axios.put(`/oa/customer/consignees/addr/${id}`,sendParam).then(res=>{
+                resolve(res)
+            })
+        }) 
+    }
+}
+
